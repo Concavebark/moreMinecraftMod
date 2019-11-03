@@ -5,9 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.Ingredient;
 
 public enum ToolMaterialList implements IItemTier{
-	tutorial(10.0f, 9.0f, 800, 3, 25, ItemList.tutorial_item),
-	debug(100.0f, 100.0f, 1000, 3, 25, ItemList.tutorial_item),
-	bread(5.0f, 5.0f, 999, 2, 10, ItemList.breadium);
+	bread(5.0f, 5.0f, 999, 2, 10, ItemList.bread_crumbs);
 
 	private float attackDamage, efficiency;
 	private int durability, harvestLevel, enchantability;
