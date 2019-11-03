@@ -4,13 +4,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import concavebark.moreMinecraftMod.config.Config;
+import concavebark.moreMinecraftMod.lists.ArmorMaterialList;
 import concavebark.moreMinecraftMod.lists.BlockList;
+import concavebark.moreMinecraftMod.lists.FoodList;
 import concavebark.moreMinecraftMod.lists.ItemList;
 import concavebark.moreMinecraftMod.lists.ToolMaterialList;
 import concavebark.moreMinecraftMod.world.OreGeneration;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.HoeItem;
@@ -19,6 +23,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
+import net.minecraft.item.Item.Properties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -69,20 +74,15 @@ public class moreMinecraftMod {
 		@SubscribeEvent
 		public static void registerItems(final RegistryEvent.Register<Item> event) {
 			event.getRegistry().registerAll(
-					//ItemList.breadium = new Item(new Item.Properties().group(moreMinecraft)).setRegistryName(location("breadium")),
+					ItemList.bread_crumbs = new Item(new Item.Properties().food(FoodList.breadiumFood).group(moreMinecraft)).setRegistryName(location("bread_crumbs")),
+					ItemList.bread_ore = new BlockItem(BlockList.bread_ore, new Item.Properties().group(moreMinecraft)).setRegistryName(BlockList.bread_ore.getRegistryName()),
+					ItemList.advanced_bread_ore = new BlockItem(BlockList.advanced_bread_ore, new Item.Properties().group(moreMinecraft)).setRegistryName(BlockList.advanced_bread_ore.getRegistryName()),
+					ItemList.bread_oven = new BlockItem(BlockList.bread_oven, new Item.Properties().group(moreMinecraft)).setRegistryName(BlockList.bread_oven.getRegistryName()),
 					
-					ItemList.tutorial_item = new Item(new Item.Properties().group(moreMinecraft)).setRegistryName(location("tutorial_item")),
-					
-					ItemList.tutorial_axe = new AxeItem(ToolMaterialList.tutorial, -1.0f, 6.0f, new Item.Properties().group(moreMinecraft)).setRegistryName(location("tutorial_axe")),
-					ItemList.tutorial_pickaxe = new PickaxeItem(ToolMaterialList.tutorial, -2, 3.0f, new Item.Properties().group(moreMinecraft)).setRegistryName(location("tutorial_pickaxe")),
-					ItemList.tutorial_shovel = new ShovelItem(ToolMaterialList.tutorial, 0, 1.0f, new Item.Properties().group(moreMinecraft)).setRegistryName(location("tutorial_shovel")),
-					ItemList.tutorial_hoe = new HoeItem(ToolMaterialList.tutorial, 3.0f, new Item.Properties().group(moreMinecraft)).setRegistryName(location("tutorial_hoe")),
-					ItemList.tutorial_sword = new SwordItem(ToolMaterialList.tutorial, 0, 1.0f, new Item.Properties().group(moreMinecraft)).setRegistryName(location("tutorial_sword")),
-					
-					ItemList.tutorial_ore = new BlockItem(BlockList.tutorial_ore, new Item.Properties().group(moreMinecraft)).setRegistryName(BlockList.tutorial_ore.getRegistryName()),
-					ItemList.tutorial_ore_nether = new BlockItem(BlockList.tutorial_ore_nether, new Item.Properties().group(moreMinecraft)).setRegistryName(BlockList.tutorial_ore_nether.getRegistryName()),
-					ItemList.tutorial_ore_end = new BlockItem(BlockList.tutorial_ore_end, new Item.Properties().group(moreMinecraft)).setRegistryName(BlockList.tutorial_ore_end.getRegistryName()),
-					ItemList.tutorial_block = new BlockItem(BlockList.tutorial_block, new Item.Properties().group(moreMinecraft)).setRegistryName(BlockList.tutorial_block.getRegistryName())
+					ItemList.artisan_bread = new Item(new Item.Properties().group(moreMinecraft)).setRegistryName(location("artisan_bread")),
+					ItemList.sourdough_bread = new Item(new Item.Properties().group(moreMinecraft)).setRegistryName(location("sourdough_bread")),
+					ItemList.baguette = new Item(new Item.Properties().group(moreMinecraft)).setRegistryName(location("baguette")),
+					ItemList.croissant = new Item(new Item.Properties().group(moreMinecraft)).setRegistryName(location("croissant"))
 			);
 			logger.info("items registered");
 		}
@@ -90,12 +90,9 @@ public class moreMinecraftMod {
 		@SubscribeEvent
 		public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 			event.getRegistry().registerAll(
-					//BlockList.bread_ore = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 5.0f).sound(SoundType.STONE)).setRegistryName(location("bread_ore")),
-					
-					BlockList.tutorial_block = new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(2.0f, 3.0f).lightValue(15).sound(SoundType.METAL)).setRegistryName(location("tutorial_block")),
-					BlockList.tutorial_ore = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 15.0f).sound(SoundType.STONE)).setRegistryName(location("tutorial_ore")),
-					BlockList.tutorial_ore_nether = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 15.0f).sound(SoundType.STONE)).setRegistryName(location("tutorial_ore_nether")),
-					BlockList.tutorial_ore_end = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 15.0f).sound(SoundType.STONE)).setRegistryName(location("tutorial_ore_end"))
+					BlockList.bread_ore = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 5.0f).sound(SoundType.STONE)).setRegistryName(location("bread_ore")),
+					BlockList.advanced_bread_ore = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 8.0f).sound(SoundType.STONE)).setRegistryName(location("advanced_bread_ore")),
+					BlockList.bread_oven = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f).sound(SoundType.STONE)).setRegistryName(location("bread_oven"))
 			);
 			logger.info("blocks registered");
 		}
