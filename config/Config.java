@@ -18,6 +18,8 @@ public class Config {
 	public static final ForgeConfigSpec client_config;
 	
 	static {
+		OregenConfig.init(server_builder, client_builder);
+		
 		server_config = server_builder.build();
 		client_config = client_builder.build();
 	}
